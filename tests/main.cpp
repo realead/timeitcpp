@@ -36,8 +36,20 @@ int main(){
 
    
    Callable c;
-   std::cout<<"Callable time:"
+   std::cout<<"Callable time: "
             <<timeit::timeit(c, 24)
             <<"\n";
+
+
+   //with setup:
+   std::cout<<"Callable time with setup: "
+            <<timeit::timeit(c, [](){std::cout<<"setup...\n";}, 10)
+            <<"\n";
+
+   std::cout<<"Rvalue time with setup: "
+            <<timeit::timeit([](){return 1.0;}, [](){std::cout<<"setup...\n";}, 9)
+            <<"\n";
+
+
 
 }
