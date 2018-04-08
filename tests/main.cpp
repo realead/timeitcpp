@@ -3,7 +3,8 @@
 #include <vector>
 #include <string>
 
-#include "timeit.h"
+#include <timeit.h>
+#include <timeitmagic.h>
 
 
 struct Callable{
@@ -68,13 +69,13 @@ int main(){
 
 
    //magic:
-   std::cout<<"magic callable, no setup "<<timeit::magic(c).time<<"\n";
-   std::cout<<"magic temp lambda, callable setup "<<timeit::magic([](){return 1.0;},c).time<<"\n";
-   std::cout<<"magic lambda, temp lambda setup "<<timeit::magic(f, [](){return "";}).time<<"\n";
+   std::cout<<"magic callable, no setup "<<timeitmagic::timeit(c).time<<"\n";
+   std::cout<<"magic temp lambda, callable setup "<<timeitmagic::timeit([](){return 1.0;},c).time<<"\n";
+   std::cout<<"magic lambda, temp lambda setup "<<timeitmagic::timeit(f, [](){return "";}).time<<"\n";
 
 
    //print magic:
-   timeit::print_magic([](){return 1.0;});
-   timeit::print_magic([](){return 1.0;},c);
-   timeit::print_magic(f, [](){return "";});
+   timeitmagic::print([](){return 1.0;});
+   timeitmagic::print([](){return 1.0;},c);
+   timeitmagic::print(f, [](){return "";});
 }
