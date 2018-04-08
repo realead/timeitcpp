@@ -1,6 +1,8 @@
 
 #include <iostream>
 #include <vector>
+#include <string>
+
 #include "timeit.h"
 
 
@@ -12,6 +14,14 @@ struct Callable{
   }
 };
 
+
+void print_vector(const std::vector<double> &vec, const std::string &label){
+   std::cout<<label<<":";
+   for(const auto &v : vec){
+      std::cout<<" "<<v;
+   }
+   std::cout<<"\n";
+}
 
 int main(){
    std::vector<double> vec(2000, 1.1);
@@ -50,6 +60,11 @@ int main(){
             <<timeit::timeit([](){return 1.0;}, [](){std::cout<<"setup...\n";}, 9)
             <<"\n";
 
+
+   //repeat:
+   print_vector(timeit::repeat(c,5,3), "repeat callable, no setup");
+   print_vector(timeit::repeat([](){return 1.0;},c,5,3), "repeat temp lambda, callable setup");
+   print_vector(timeit::repeat(f, [](){return 1.0;},5,3), "repeat lambda, temp lambda setup");
 
 
 }

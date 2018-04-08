@@ -1,10 +1,11 @@
 #include <chrono>
+#include <vector>
 
 
 namespace timeit{
     
 
-    //returns time needed for one execution in seconds
+    //returns time needed for one execution in seconds:
     template<typename Fun1>
     double timeit(Fun1&& stmt, int number_of_executions=1)
     {  
@@ -21,5 +22,25 @@ namespace timeit{
     {  
        setup();
        return timeit(stmt,number_of_executions);
+    }
+
+
+    //make multiple runs:
+    template<typename Fun1>
+    std::vector<double> repeat(Fun1&& stmt, int repeat=3, int number=1){
+       std::vector<double> res;
+       for(int i=0;i<repeat;i++){
+           res.push_back(timeit(stmt, number));
+       }
+       return res;
+    }
+
+    template<typename Fun1,  typename Fun2>
+    std::vector<double> repeat(Fun1&& stmt, Fun2&& setup, int repeat=3, int number=1){
+       std::vector<double> res;
+       for(int i=0;i<repeat;i++){
+           res.push_back(timeit(stmt, setup, number));
+       }
+       return res;
     }
 }
