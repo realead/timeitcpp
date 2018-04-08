@@ -67,4 +67,8 @@ int main(){
    print_vector(timeit::repeat(f, [](){return 1.0;},5,3), "repeat lambda, temp lambda setup");
 
 
+   //magic:
+   std::cout<<"magic callable, no setup "<<timeit::magic(c).time<<"\n";
+   std::cout<<"magic temp lambda, callable setup "<<timeit::magic([](){return 1.0;},c).time<<"\n";
+   std::cout<<"magic lambda, temp lambda setup "<<timeit::magic(f, [](){return "";}).time<<"\n";
 }
