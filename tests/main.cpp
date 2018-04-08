@@ -71,4 +71,10 @@ int main(){
    std::cout<<"magic callable, no setup "<<timeit::magic(c).time<<"\n";
    std::cout<<"magic temp lambda, callable setup "<<timeit::magic([](){return 1.0;},c).time<<"\n";
    std::cout<<"magic lambda, temp lambda setup "<<timeit::magic(f, [](){return "";}).time<<"\n";
+
+
+   //print magic:
+   timeit::print_magic([](){return 1.0;});
+   timeit::print_magic([](){return 1.0;},c);
+   timeit::print_magic(f, [](){return "";});
 }
